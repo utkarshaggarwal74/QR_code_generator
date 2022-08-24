@@ -12,6 +12,7 @@
           theme: {
             colors:{
               'cyan-blue':'#05abba',
+              'cyan-500':'#06b6d4',
               'gray-600':'#4b5563',
               'gray-200':'#e5e7eb',
               'slate-50':'#f8fafc'
@@ -72,7 +73,9 @@
             </div>
         </div>
         <!-- output: Generated QR code -->
-        <div class="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-15">
+        <div 
+          id="generated" 
+          class="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-15">
           
           
           <!-- spinner animation during processing -->
@@ -127,7 +130,7 @@
           
           
           <!-- QR code image output-->
-          <div id="qrcode" class="m-auto"></div>
+          <div id="qrcode" class="m-auto mt-10 mb-10 "></div>
         </div>
     </main>
 </body>
