@@ -10,6 +10,12 @@
     <script>
         tailwind.config = {
           theme: {
+            colors:{
+              'cyan-blue':'#05abba',
+              'gray-600':'#4b5563',
+              'gray-200':'#e5e7eb',
+              'slate-50':'#f8fafc'
+            },
             extend: {
               fontFamily: {
                 sans: ['Poppins','sans-serif'],
@@ -21,9 +27,108 @@
       <!-- using cdnjs qrcode library -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/script.js" defer></script>
+    <style>
+      #spinner {
+        display: none;
+      }
+    </style>
     <title>QR code generator</title>
 </head>
 <body>
-    <h1>hello!</h1>
+    <header class="bg-cyan-blue p-4 mb-10">
+        <div class="m-auto">
+            <div class=" text-center text-xl font-bold text-slate-50">
+                QR Code generator
+            </div>
+        </div> 
+    </header>
+    <main>
+        <div class="flex flex-col-reverse align-center justify-center m-auto md:max-w-4xl md:flex-row">
+            <div class="w-full p-10 md:w-2/3 mr-24">
+                 <h1 class="text-3xl font-bold mb-5 md:text-4xl">Get your QR code Now!</h1>
+                 <p class="mb-4">just Scan with your Smartphone users to access Websites Simply and Quickly.</p>
+                 <p>Enter your URL below to generate a QR code and Download the image.</p>
+                 <form id="generate-form" class="mt-4">
+                  <input 
+                    id ="url" 
+                    type="url"
+                    placeholder="Enter a URL"
+                    class="w-full border-2 border-gray-200 rounded p-3 text-grey-dark mr-2 focus:outline-none mb-5">
+                    <select id="size" class="w-full border-2 border-gray-200 rounded p-3 text-grey-dark mr-2 focus:outline-none">
+                      <option value="100">100x100</option>
+                      <option value="200">200x200</option>
+                      <option value="300" selected>300x300</option>
+                      <option value="400">400x400</option>
+                      <option value="500">500x500</option>
+                      <option value="600">600x600</option>
+                    </select>
+                    <button class="bg-gray-600 rounded w-full text-slate-50 py-3 px-4 mt-5 hover:bg-cyan-blue" type="submit">
+                      Generate QR code
+                    </button>
+                 </form>
+            </div>
+            <div class="w-full md:w-1/3 self-center">
+                <img src="img/qrcode_scanner.jpg" alt="" class="rounded-full w-[50%] m-auto md:w-full">
+            </div>
+        </div>
+        <!-- output: Generated QR code -->
+        <div class="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-15">
+          
+          
+          <!-- spinner animation during processing -->
+          <div id="spinner" role=""status>
+            <svg class="inline w-20 h-20 fill-slate-50 stroke-2 stroke-cyan-blue " viewBox="0 0 20" xmlns="http://www.w3.org/2000/svg">
+              <!-- <g fill="slate-50" fill-rule="evenodd"> -->
+                  <!-- <g transform="translate(1 1)" stroke-width="2"> -->
+                      <circle cx="5" cy="50" r="5">
+                          <animate attributeName="cy"
+                               begin="0s" dur="2.2s"
+                               values="50;5;50;50"
+                               calcMode="linear"
+                               repeatCount="indefinite" />
+                          <animate attributeName="cx"
+                               begin="0s" dur="2.2s"
+                               values="5;27;49;5"
+                               calcMode="linear"
+                               repeatCount="indefinite" />
+                      </circle>
+                      <circle cx="27" cy="5" r="5">
+                          <animate attributeName="cy"
+                               begin="0s" dur="2.2s"
+                               from="5" to="5"
+                               values="5;50;50;5"
+                               calcMode="linear"
+                               repeatCount="indefinite" />
+                          <animate attributeName="cx"
+                               begin="0s" dur="2.2s"
+                               from="27" to="27"
+                               values="27;49;5;27"
+                               calcMode="linear"
+                               repeatCount="indefinite" />
+                      </circle>
+                      <circle cx="49" cy="50" r="5">
+                          <animate attributeName="cy"
+                               begin="0s" dur="2.2s"
+                               values="50;50;5;50"
+                               calcMode="linear"
+                               repeatCount="indefinite" />
+                          <animate attributeName="cx"
+                               from="49" to="49"
+                               begin="0s" dur="2.2s"
+                               values="49;5;27;49"
+                               calcMode="linear"
+                               repeatCount="indefinite" />
+                      </circle>
+                  </g>
+              </g>
+          </svg>
+            <span class="sr-only">Loading...</span>
+          </div>
+          
+          
+          <!-- QR code image output-->
+          <div id="qrcode" class="m-auto"></div>
+        </div>
+    </main>
 </body>
 </html>
